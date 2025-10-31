@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Unison Shell</title>
+    <style>
+      body { font-family: system-ui, sans-serif; margin: 0; padding: 24px; background: #0b0b0b; color: #f2f2f2; }
+      header { margin-bottom: 24px; }
+      .card { background: #141414; border: 1px solid #222; border-radius: 12px; padding: 16px; margin-bottom: 16px; }
+      input, button, select { font-size: 16px; }
+      input[type="text"] { width: 100%; padding: 10px; border-radius: 8px; border: 1px solid #333; background: #0f0f0f; color: #fff; }
+      button { padding: 10px 14px; border-radius: 8px; border: 1px solid #333; background: #1f1f1f; color: #fff; cursor: pointer; }
+      button:hover { background: #2a2a2a; }
+      .row { display: flex; gap: 12px; align-items: center; }
+      .mt { margin-top: 12px; }
+      pre { background: #0f0f0f; padding: 12px; border-radius: 8px; overflow: auto; }
+      label { display: block; margin-bottom: 6px; opacity: 0.9; }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>Unison Shell</h1>
+      <p>Developer Mode: onboarding skeleton and echo intent</p>
+    </header>
+
+    <section class="card">
+      <h2>Onboarding (skeleton)</h2>
+      <div class="row">
+        <label for="language">Language</label>
+        <select id="language">
+          <option value="en">English</option>
+          <option value="es">Español</option>
+        </select>
+      </div>
+      <div class="mt">
+        <button id="saveOnboarding">Save onboarding (Tier B)</button>
+      </div>
+      <p class="mt" id="onboardingStatus"></p>
+    </section>
+
+    <section class="card">
+      <h2>Echo intent</h2>
+      <label for="echoText">Message</label>
+      <input id="echoText" type="text" placeholder="Type something to echo" />
+      <div class="mt row">
+        <button id="sendEcho">Send to Orchestrator</button>
+      </div>
+      <pre class="mt" id="echoResult"></pre>
+    </section>
+
+    <section class="card">
+      <h2>Policy confirmation demo</h2>
+      <div class="row">
+        <button id="requestConfirm" type="button">Request confidential summarize</button>
+        <button id="sendConfirm" type="button" disabled>Confirm action</button>
+      </div>
+      <p class="mt" id="confirmAlt"></p>
+      <pre class="mt" id="confirmResult"></pre>
+    </section>
+
+    <section class="card">
+      <h2>Multimodal I/O (speech & vision)</h2>
+      <div class="row">
+        <button id="captureSpeech" type="button">Capture speech (STT)</button>
+        <button id="captureVision" type="button">Capture image</button>
+      </div>
+      <div class="mt row">
+        <button id="sendSpeechEvent" type="button" disabled>Send speech event</button>
+        <button id="sendVisionEvent" type="button" disabled>Send vision event</button>
+      </div>
+      <p class="mt" id="multimodalStatus"></p>
+      <pre class="mt" id="multimodalResult"></pre>
+    </section>
+
+    <script type="module" src="index.js"></script>
+  </body>
+</html>
