@@ -4,6 +4,9 @@
 
 Full-screen Electron shell for Developer Mode. Provides a minimal onboarding skeleton and an echo intent tester against the Orchestrator.
 
+## Status
+Optional (dev-mode) — used for local UX; not required for headless stacks.
+
 ## Run locally
 
 ```powershell
@@ -28,3 +31,9 @@ npm start
 ## Notes
 
 - If you see CORS errors in a browser context, the services need CORS enabled. Electron typically avoids this, so we skip CORS for now.
+
+## Testing
+```bash
+npm test
+```
+Simple smoke script checks required files and package metadata. Wire to CI as a next step.
