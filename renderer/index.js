@@ -16,11 +16,13 @@ const sendSpeechEventBtn = document.getElementById('sendSpeechEvent')
 const sendVisionEventBtn = document.getElementById('sendVisionEvent')
 const multimodalStatus = document.getElementById('multimodalStatus')
 const multimodalResult = document.getElementById('multimodalResult')
+const hudWakeword = document.getElementById('hudWakeword')
 
 const ORCH_URL = (window.process && window.process.env && window.process.env.UNISON_ORCH_URL) || 'http://localhost:8080'
 const CONTEXT_URL = (window.process && window.process.env && window.process.env.UNISON_CONTEXT_URL) || 'http://localhost:8081'
 const SPEECH_URL = (window.process && window.process.env && window.process.env.UNISON_SPEECH_URL) || 'http://localhost:8084'
 const VISION_URL = (window.process && window.process.env && window.process.env.UNISON_VISION_URL) || 'http://localhost:8086'
+const RENDERER_URL = (window.process && window.process.env && window.process.env.UNISON_RENDERER_URL) || 'http://localhost:8092'
 
 async function postJson(url, body) {
   const res = await fetch(url, {
@@ -28,6 +30,13 @@ async function postJson(url, body) {
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(body)
   })
+  const text = await res.text()
+  try { return { ok: res.ok, status: res.status, json: JSON.parse(text) } }
+  catch { return { ok: res.ok, status: res.status, text } }
+}
+
+async function getJson(url) {
+  const res = await fetch(url, { method: 'GET' })
   const text = await res.text()
   try { return { ok: res.ok, status: res.status, json: JSON.parse(text) } }
   catch { return { ok: res.ok, status: res.status, text } }
@@ -100,6 +109,22 @@ saveOnboardingBtn.addEventListener('click', async () => {
   const resp = await postJson(`${CONTEXT_URL}/kv/put`, kvPut)
   onboardingStatus.textContent = resp.ok ? `Saved (Tier B) for ${person_id}` : `Failed: ${resp.status}`
 })
+
+// Wake-word HUD (best-effort)
+async function refreshWakewordHud() {
+  if (!hudWakeword) return
+  try {
+    const resp = await getJson(`${RENDERER_URL}/wakeword`)
+    if (resp.ok && resp.json && resp.json.wakeword) {
+      hudWakeword.textContent = `Wake word: "${resp.json.wakeword}"`
+    } else {
+      hudWakeword.textContent = 'Wake word: unavailable'
+    }
+  } catch (e) {
+    hudWakeword.textContent = 'Wake word: error'
+  }
+}
+refreshWakewordHud().catch(() => {})
 
 let lastConfirmToken = null
 requestConfirmBtn?.addEventListener('click', async () => {

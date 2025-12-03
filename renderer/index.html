@@ -6,7 +6,7 @@
     <title>Unison Shell</title>
     <style>
       body { font-family: system-ui, sans-serif; margin: 0; padding: 24px; background: #0b0b0b; color: #f2f2f2; }
-      header { margin-bottom: 24px; }
+      header { margin-bottom: 24px; display: flex; flex-direction: column; gap: 4px; }
       .card { background: #141414; border: 1px solid #222; border-radius: 12px; padding: 16px; margin-bottom: 16px; }
       input, button, select { font-size: 16px; }
       input[type="text"] { width: 100%; padding: 10px; border-radius: 8px; border: 1px solid #333; background: #0f0f0f; color: #fff; }
@@ -16,12 +16,17 @@
       .mt { margin-top: 12px; }
       pre { background: #0f0f0f; padding: 12px; border-radius: 8px; overflow: auto; }
       label { display: block; margin-bottom: 6px; opacity: 0.9; }
+      .hud { font-size: 13px; opacity: 0.8; display: flex; gap: 12px; flex-wrap: wrap; }
+      .hud span { padding: 2px 8px; border-radius: 999px; background: #181818; border: 1px solid #333; }
     </style>
   </head>
   <body>
     <header>
       <h1>Unison Shell</h1>
       <p>Developer Mode: onboarding skeleton and echo intent</p>
+      <div class="hud">
+        <span id="hudWakeword">Wake word: loading…</span>
+      </div>
     </header>
 
     <section class="card">
