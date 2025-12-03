@@ -37,3 +37,7 @@ jobs:
         run: |
           node -v
           npm -v
+
+      - name: Accessibility check (renderer HTML)
+        run: |
+          npm run a11y

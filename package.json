@@ -7,10 +7,12 @@
   "scripts": {
     "start": "electron .",
     "test": "node scripts/smoke.js",
-    "lint": "npm run test"
+    "lint": "npm run test",
+    "a11y": "node scripts/a11y.js"
   },
   "devDependencies": {
-    "electron": "29.4.0"
+    "electron": "29.4.0",
+    "pa11y": "6.3.0"
   },
   "dependencies": {}
 }
