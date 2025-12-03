@@ -37,3 +37,7 @@ npm start
 npm test
 ```
 Simple smoke script checks required files and package metadata. Wire to CI as a next step.
+
+## Docs
+
+Full docs at https://project-unisonos.github.io
